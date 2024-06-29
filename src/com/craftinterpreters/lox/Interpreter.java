@@ -79,7 +79,7 @@ public class Interpreter implements Expr.Visitor<Object> {
         return null;
     }
 
-    void interpreter(Expr expression) {
+    void interpret(Expr expression) {
         try {
             Object value = evaluate(expression);
             System.out.println(stringify(value));
