@@ -13,6 +13,7 @@ public class GenerateAst {
         }
         String outputDir = args[0];
         defineAst(outputDir, "Expr", Arrays.asList(
+                "Assign   : Token name, Expr value",
                 "Binary   : Expr left, Token operator, Expr right",
                 "Grouping : Expr expression",
                 "Literal  : Object value",
@@ -34,7 +35,7 @@ public class GenerateAst {
 
         writer.println("package com.craftinterpreters.lox;");
         writer.println();
-        //writer.println("import java.util.List;");
+        // writer.println("import java.util.List;");
         writer.println();
         writer.println("abstract class " + baseName + " {");
 

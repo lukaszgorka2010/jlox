@@ -26,7 +26,7 @@ class Parser {
     }
 
     private Expr expression() {
-        return comma();
+        return assignment();
     }
 
     private Stmt declaration() {
@@ -73,17 +73,24 @@ class Parser {
         return new Stmt.Expression(expr);
     }
 
-    private Expr comma() {
+    private Expr assignment() {
         Expr expr = equality();
 
-        while (match(COMMA)) {
-            Token operator = previous();
-            Expr right = equality();
-            expr = new Expr.Binary(expr, operator, right);
+        if (match(EQUAL)) {
+            Token equals = previous();
+            Expr value = assignment();
+
+            if (expr instanceof Expr.Variable) {
+                Token name = ((Expr.Variable)expr).name;
+                return new Expr.Assign(name, value);
+            }
+
+            error(equals, "Invalid assignment target.");
         }
 
         return expr;
     }
+
 
     private Expr equality() {
         Expr expr = comparison();
