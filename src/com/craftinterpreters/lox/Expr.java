@@ -1,6 +1,8 @@
 package com.craftinterpreters.lox;
 
+import java.util.List;
 
+@SuppressWarnings("unused")
 abstract class Expr {
   interface Visitor<R> {
     R visitAssignExpr(Assign expr);
