@@ -30,6 +30,7 @@ public class GenerateAst {
                 "Function   : Token name, List<Token> params," +
                             " List<Stmt> body",
                 "Print      : Expr expression",
+                "Return     : Token keyword, Expr value",
                 "Var        : Token name, Expr initializer",
                 "While      : Expr condition, Stmt body"));
 
@@ -45,7 +46,6 @@ public class GenerateAst {
         writer.println();
         writer.println("import java.util.List;");
         writer.println();
-        writer.println("@SuppressWarnings(\"unused\")");
         writer.println("abstract class " + baseName + " {");
 
         defineVisitor(writer, baseName, types);
