@@ -241,6 +241,14 @@ public class Interpreter implements Expr.Visitor<Object>,
     }
 
     @Override
+    public Void visitClassStmt(Stmt.Class stmt) {
+        environment.define(stmt.name.lexeme, null);
+        LoxClass klass = new LoxClass(stmt.name.lexeme);
+        environment.assign(stmt.name, klass);
+        return null;
+    }
+
+    @Override
     public Void visitExpressionStmt(Stmt.Expression stmt) {
         evaluate(stmt.expression);
         return null;
@@ -304,7 +312,7 @@ public class Interpreter implements Expr.Visitor<Object>,
         Object value = evaluate(expr.value);
 
         Integer distance = locals.get(expr);
-        if (distanace != null) {
+        if (distance != null) {
             environment.assignAt(distance, expr.name, value);
         } else {
             globals.assign(expr.name, value);
